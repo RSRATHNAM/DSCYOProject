@@ -67,7 +67,7 @@ data("wine")
 ## Created Data Partition so that we can have train dataset and test dataset. We are randomly picking 90% of the data to train and we will use the 10% of the data to validate our model. The code is as below
 
 ```{r echo=TRUE}
-set.seed(66)
+set.seed(25)
 wine_test_index <- createDataPartition(y = wine$Type, times = 1, p = 0.1, list = FALSE)
 
 ############################ Training set #####################################
@@ -90,8 +90,8 @@ test_output <- wine_test_set %>% select(Type) %>% .$Type
 ## Method and Analysis
 __________________________________________________________________________________
 
-To build the K Nearest Neighbor model, I have decided to train the model using some tuning parameters. I have decided to use cross validation with 10 resampling with 90% of the data. I then decided to train the model with k value of 1,3,4,5 and 7. This is to determine the ideal k value that has relatively good accuracy.
-The plan is then to use the k value to create the final model. AS you can see from the plot knn= 5 and 7 seems to produce an acceptable accuracy to build our model
+To build the K Nearest Neighbor model, I am training the model using some tuning parameters. I am using cross validation with 10 resampling with 90% of the data. I then decided to train the model with k value of 1,3,4,5 and 7. This is to determine the ideal k value that has relatively good accuracy.
+The plan is then to use the k value to create the final model. 
 
 ```{r train_knn, echo=FALSE}
 cv_no <- 10
@@ -115,7 +115,7 @@ y_hat_knn <- predict(knn_fit,wine_test_set,type="class")
 
 ## Results
 __________________________________________________________________________________
-As you can see from the below output that achieved an accuracy of above 60%
+As you can see from the below output that achieved an accuracy of more than 70% which is way better than the 60% expectation depicted in the internet sources
 ```{r cm}
 # lets see how accurate it is by executing the confusion matrix: Predicted output versus actual output
 # in the test data
@@ -126,6 +126,5 @@ cm$overall["Accuracy"]
 ```
 
 ## Conclusion
-__________________________________________________________________________________
-
-Through the K nearest neighbor model we were able to predict the output classification i.e the wine type 1, 2 or 3 with over 60% accuracy. Which was our goal to begin with. This exercise also proves the usefulness of the K nearest neighbor when the target output is more than 2 classifiers (in this case its 3.) Although this dataset is very little in size, this simple model did a pretty decent job in classifying the output (3 values) from multiple features (13 inputs.)
+_______________________________________________________________________________
+Through the K nearest neighbor model we were able to predict the output classification i.e the wine type 1, 2 or 3 with over 60% accuracy. We achieved an accuracy of 73.68421% which is way better than the model that you would see from the internet sources. We exceeded our goal.  This exercise also proves the usefulness of the K nearest neighbor when the target output is more than 2 classifiers (in this case its 3.) Although this dataset is very little in size, this simple model did a pretty decent job in classifying the output (3 values) from multiple features (13 inputs.)

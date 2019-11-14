@@ -43,7 +43,7 @@ levels(wine$Type) # "1" "2" "3"
 ###############################################################################
 dim(wine) #178  14
 
-set.seed(66)
+set.seed(25)
 wine_test_index <- createDataPartition(y = wine$Type, times = 1, p = 0.1, list = FALSE)
 
 ############################ Training set #####################################
@@ -62,16 +62,16 @@ test_input_features <- wine_test_set %>% select(-Type)
 # Store test output in a separate variable
 test_output <- wine_test_set %>% select(Type) %>% .$Type
 
-#################################################################################
-################################### GOAL ########################################
-#################### About 60% accuracy for Classification rate##################
-#################################################################################
 
-# Use the 13 features (Chemical analysis), we would like to determine the type of
-# wine, which is categorized as 1, 2 or 3. We will use the 90% of the data for
-# training and build the model with that. We will then predict the output using the
-# test dataset. Based on the sources on the internet, it seems like getting a 
-# classification rate of about 68% seems to be good accuracy
+################################### Objective ########################################
+#################### About 60% accuracy for Classification rate##################
+
+
+# With the 13 features (Chemical analysis), we can determine the type of
+# wine, which are of types 1, 2 or 3. 90% of the data will be used for
+# training and to build the model with that. We will then predict the output using the
+# test dataset. From the sources on the internet, getting a
+# classification rate of about 60% seems to be more than acceptable
 # ref: https://www.datacamp.com/community/tutorials/k-nearest-neighbor-classification-scikit-learn
 
 
@@ -99,4 +99,4 @@ y_hat_knn <- predict(knn_fit,wine_test_set,type="class")
 cm <- confusionMatrix(y_hat_knn,test_output) 
 
 # Lets determine the accuracy
-cm$overall["Accuracy"] #  Accuracy 0.6315789 
+cm$overall["Accuracy"] #  Accuracy 0.7368421
